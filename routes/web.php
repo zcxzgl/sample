@@ -19,6 +19,8 @@ Route::get('/help', 'StaticPages7Controller@help')->name('help');
 Route::get('signup', 'UsersController@create')->name('signup');
 Route::resource('users', 'UsersController');
 Route::get('/users/{user}/edit', 'UsersController@edit')->name('users.edit');
+Route::get('/users/{user}/followings','UsersController@followings')->name('users.followings');
+Route::get('/users/{user}/followers','UsersController@followers')->name('users.followers');
 
 Route::get('login', 'SessionsController@create')->name('login');
 Route::post('login', 'SessionsController@store')->name('login');
@@ -39,3 +41,6 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 
 //微博的创建和删除
 Route::resource('statuses','StatusesController',['only'=>['store','destroy']]);
+
+Route::post('/users/followers/{user}','FollowersController@store')->name('followers.store');
+Route::delete('/user/followers/{user}','FollowersController@destroy')->name('followers.destroy');
